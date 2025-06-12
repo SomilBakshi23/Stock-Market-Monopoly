@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='superadminstyle.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+    <!-- Video Background -->
+    <div class="video-bg">
+        <video autoplay muted loop id="background-video" playsinline>
+            <source src="{{ url_for('static', filename='bg video.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    
+    <div class="container mt-4">
+        <!-- Logout Button -->
+        <div class="text-right mb-3">
+            <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+        </div>
+
+        <h2 class="text-center">Super Admin Dashboard</h2>
+
+        <!-- Pending Admin Approvals -->
+        <div class="card mt-4">
+            <div class="card-header bg-warning text-dark">
+                <h4>Pending Admin Approvals</h4>
+            </div>
+            <div class="card-body">
+                {% if pending_admins %}
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Requested Role</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for admin in pending_admins %}
+                            <tr>
+                                <td>{{ admin.name }}</td>
+                                <td>{{ admin.email }}</td>
+                                <td>
+                                    <select class="form-control admin-role" data-id="{{ admin.id }}">
+                                        <option value="Finance">Finance</option>
+                                        <option value="Support">Support</option>
+                                        <option value="Moderator">Moderator</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button class="btn btn-success approve-btn" data-id="{{ admin.id }}">Approve</button>
+                                    <button class="btn btn-danger reject-btn" data-id="{{ admin.id }}">Reject</button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="text-muted">No pending admin approvals.</p>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- List of All Admins -->
+        <div class="card mt-4">
+            <div class="card-header bg-info text-white">
+                <h4>Registered Admins</h4>
+            </div>
+            <div class="card-body">
+                {% if approved_admins %}
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for admin in approved_admins %}
+                            <tr>
+                                <td>{{ admin.name }}</td>
+                                <td>{{ admin.email }}</td>
+                                <td>{{ admin.admin_role.role_type if admin.admin_role else 'No Role' }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="text-muted">No admins found.</p>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- List of Normal Users -->
+        <div class="card mt-4">
+            <div class="card-header bg-primary text-white">
+                <h4>Registered Users</h4>
+            </div>
+            <div class="card-body">
+                {% if users %}
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.email }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="text-muted">No registered users.</p>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Reported Issues -->
+        <div class="card mt-4">
+            <div class="card-header bg-danger text-white">
+                <h4>Reported Issues</h4>
+            </div>
+            <div class="card-body">
+                {% if issues %}
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Issue</th>
+                                <th>Reported By</th>
+                                <th>Assign to Admin</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for issue in issues %}
+                            <tr>
+                                <td>{{ issue.description }}</td>
+                                <td>{{ issue.reported_by }}</td>
+                                <td>
+                                    <select class="form-control issue-assign" data-id="{{ issue.id }}">
+                                        {% for admin in approved_admins %}
+                                            <option value="{{ admin.id }}">{{ admin.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                                <td>
+                                    <button class="btn btn-warning assign-issue" data-id="{{ issue.id }}">Assign</button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="text-muted">No reported issues.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Block -->
+    {% block extra_js %}
+    <script>
+        // Approve Admin
+        $(".approve-btn").click(function() {
+            let adminId = $(this).data("id");
+            let role = $(".admin-role[data-id='" + adminId + "']").val();
+    
+            $.post("/approve_admin", { admin_id: adminId, role: role }, function(response) {
+                alert(response.message);
+                location.reload();
+            });
+        });
+    
+        // Reject Admin
+        $(".reject-btn").click(function() {
+            let adminId = $(this).data("id");
+            $.post("/reject_admin", { admin_id: adminId }, function(response) {
+                alert(response.message);
+                location.reload();
+            });
+        });
+    
+        // Assign Issue to Admin
+        $(".assign-issue").click(function() {
+            let issueId = $(this).data("id");
+            let adminId = $(".issue-assign[data-id='" + issueId + "']").val();
+    
+            $.post("/assign_issue", { issue_id: issueId, admin_id: adminId }, function(response) {
+                alert(response.message);
+                location.reload();
+            });
+        });
+    </script>
+    {% endblock %}
+</body>
+</html>

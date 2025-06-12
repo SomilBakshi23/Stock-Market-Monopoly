@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trade Stocks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='tradestyle.css') }}">
+    <!-- Add jQuery and jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <video autoplay loop muted class="video-background">
+        <source src="{{ url_for('static', filename='bg video.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="main-container">
+        <h1>Stock Trading</h1>
+
+        <!-- Balance Display -->
+        <div>
+            {% if session.email %}
+                <h2>Your Balance: ₹{{ user.balance | number_format }}</h2>
+            {% else %}
+                <h2>Login to start trading!</h2>
+            {% endif %}
+        </div>
+
+        <!-- Current Stock Price -->
+        {% if selected_symbol and current_price is not none %}
+            <h2>Current Stock Price</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Stock Symbol</th>
+                        <th>Price (in ₹)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ selected_symbol }}</td>
+                        <td>₹{{ current_price | number_format }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        {% endif %}
+
+        <!-- Trading Form -->
+        {% if session.email %}
+            <h2>Trade Stocks</h2>
+            <form method="POST" action="/trade">
+                <label for="symbol">Stock Symbol:</label>
+                <input type="text" id="symbol" name="symbol" required placeholder="Search for a stock...">
+
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" min="1" required>
+
+                <label for="action">Action:</label>
+                <select id="action" name="action">
+                    <option value="buy">Buy</option>
+                    <option value="sell">Sell</option>
+                </select>
+
+                <button type="submit">Execute Trade</button>
+            </form>
+
+            <!-- Trade Success/Error Messages -->
+            {% if trade_success %}
+                <p class="success">{{ trade_success }}</p>
+            {% endif %}
+            {% if trade_error %}
+                <p class="error">{{ trade_error }}</p>
+            {% endif %}
+
+            <!-- Stock Information Form -->
+            <h2>Get Stock Information</h2>
+            <form method="POST" action="/trade">
+                <label for="info_symbol">Stock Symbol:</label>
+                <input type="text" id="info_symbol" name="info_symbol" required placeholder="Search for a stock...">
+                <button type="submit" name="info_action" value="get_info">Get Info</button>
+            </form>
+
+            <!-- Stock Info Error Message -->
+            {% if stock_info_error %}
+                <p class="error">{{ stock_info_error }}</p>
+            {% endif %}
+
+            <!-- Company Information -->
+            {% if company_info %}
+<div class="company-info">
+    <h2>{{ company_info.name }}</h2>
+    <div class="info-grid">
+        <div>Sector: <span>{{ company_info.sector }}</span></div>
+        <div>Industry: <span>{{ company_info.industry }}</span></div>
+        <div>Market Cap: <span>₹{{ company_info.market_cap | number_format }}</span></div>
+        <div>Employees: <span>{{ company_info.employees }}</span></div>
+        <div>CEO: <span>{{ company_info.ceo }}</span></div>
+        <div>Website: <a href="{{ company_info.website }}" target="_blank">{{ company_info.website }}</a></div>
+    </div>
+</div>
+
+{% endif %}
+
+            <!-- 5-Day Historical Data -->
+            {% if historical_data %}
+                <div class="historical-section">
+                    <h2>Historical Data</h2>
+                    <div class="scrollable-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Open</th>
+                                    <th>High</th>
+                                    <th>Low</th>
+                                    <th>Close</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for day in historical_data %}
+                                    <tr>
+                                        <td>{{ day.Date }}</td>
+                                        <td>₹{{ day.Open | number_format }}</td>
+                                        <td>₹{{ day.High | number_format }}</td>
+                                        <td>₹{{ day.Low | number_format }}</td>
+                                        <td>₹{{ day.Close | number_format }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Candlestick Chart -->
+            {% if candles_data and candles_data|length > 0 %}
+                <h2>Candlestick Chart</h2>
+                <div class="candlestick-container">
+                    <div id="candlestick-chart"></div>
+                </div>
+                <script>
+                    try {
+                        var candlestickData = {{ candles_data | tojson | safe }};
+                        console.log("Raw candle data:", candlestickData);
+
+                        if (candlestickData.length > 0) {
+                            // Process dates for Plotly
+                            var processedData = candlestickData.map(item => ({
+                                x: new Date(item.Datetime + ' GMT-0400'), // Explicit Eastern Time
+                                open: parseFloat(item.Open),
+                                high: parseFloat(item.High),
+                                low: parseFloat(item.Low),
+                                close: parseFloat(item.Close)
+                            }));
+
+                            var trace = {
+                                x: processedData.map(d => d.x),
+                                close: processedData.map(d => d.close),
+                                high: processedData.map(d => d.high),
+                                low: processedData.map(d => d.low),
+                                open: processedData.map(d => d.open),
+                                type: 'candlestick',
+                                name: '{{ selected_symbol }}',
+                                increasing: {line: {color: '#2ECC71'}},
+                                decreasing: {line: {color: '#E74C3C'}}
+                            };
+
+                            var layout = {
+                                title: `${processedData.length} Bars Available for {{ selected_symbol }}`,
+                                xaxis: {
+                                    type: 'date',
+                                    gridcolor: 'rgba(255,255,255,0.1)',
+                                    color: 'white',
+                                    rangeslider: { visible: false }
+                                },
+                                yaxis: {
+                                    title: 'Price (₹)',
+                                    gridcolor: 'rgba(255,255,255,0.1)',
+                                    color: 'white'
+                                },
+                                paper_bgcolor: 'rgba(0,0,0,0.5)',
+                                plot_bgcolor: 'rgba(0,0,0,0.2)',
+                                font: { color: 'white' }
+                            };
+
+                            Plotly.purge('candlestick-chart');
+                            Plotly.newPlot('candlestick-chart', [trace], layout, {
+                                responsive: true,
+                                displayModeBar: true
+                            });
+                        } else {
+                            document.getElementById('candlestick-chart').innerHTML = 
+                                '<p class="chart-error">No trading data available for {{ selected_symbol }} in the last 5 days</p>';
+                        }
+                    } catch (error) {
+                        console.error("Chart rendering error:", error);
+                        document.getElementById('candlestick-chart').innerHTML = 
+                            `<p class="chart-error">Chart error: ${error.message}</p>`;
+                    }
+                </script>
+            {% else %}
+            
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <!-- Autocomplete Script -->
+    <script>
+        $(function() {
+            // Autocomplete for Trade Stock Symbol
+            $("#symbol").autocomplete({
+                source: function(request, response) {
+                    $.getJSON("/search_stocks", {
+                        term: request.term
+                    }, response);
+                },
+                minLength: 2, // Minimum characters to trigger search
+                select: function(event, ui) {
+                    $("#symbol").val(ui.item.value); // Set the selected symbol
+                }
+            });
+
+            // Autocomplete for Get Stock Info Symbol
+            $("#info_symbol").autocomplete({
+                source: function(request, response) {
+                    $.getJSON("/search_stocks", {
+                        term: request.term
+                    }, response);
+                },
+                minLength: 2, // Minimum characters to trigger search
+                select: function(event, ui) {
+                    $("#info_symbol").val(ui.item.value); // Set the selected symbol
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Monopoly</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Video Background -->
+    <video autoplay muted loop id="bg-video">
+        <source src="{{ url_for('static', filename='bg video.mp4') }}" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <div class="container">
+        <!-- Login and Sign Up Buttons -->
+        <div class="login-signup">
+            {% if session['user_id'] %}
+                <span class="welcome-text">Welcome, {{ session['name'] }}</span>
+                <a href="{{ url_for('logout') }}">
+                    <button class="btn logout">Sign Out</button>
+                </a>
+            {% else %}
+                <a href="{{ url_for('login') }}">
+                    <button class="btn login">Login</button>
+                </a>
+                <a href="{{ url_for('signup') }}">
+                    <button class="btn signup">Sign Up</button>
+                </a>
+            {% endif %}
+        </div>
+        
+
+        <div class="buttons-section">
+            <!-- Profile Button with icon -->
+            <div class="row">
+                <a href="{{ url_for('profile') }}">
+                    <button class="btn profile">
+                        <img src="{{ url_for('static', filename='profile-icon.png') }}" alt="Profile Icon">
+                        Profile
+                    </button>
+                </a>
+            </div>
+
+            <!-- Portfolio and Trade Buttons with icons -->
+            <div class="row">
+                <a href="{{ url_for('portfolio') }}">
+                    <button class="btn portfolio">
+                        <img src="{{ url_for('static', filename='portfolio-icon.png') }}" alt="Portfolio Icon">
+                        Portfolio
+                    </button>
+                </a>
+                
+                <a href="{{ url_for('trade') }}">
+                    <button class="btn trade">
+                        <img src="{{ url_for('static', filename='trade-icon.jpg') }}" alt="Trade Icon">
+                        Trade
+                    </button>
+                </a>
+            </div>
+
+            <!-- Trading Crash Course Button with icon -->
+            <div class="row">
+                <a href="{{ url_for('crashcourse') }}">
+                    <button class="btn crash-course">
+                        <img src="{{ url_for('static', filename='crash-course-icon.png') }}" alt="Crash Course Icon">
+                        Trading Crash Course
+                    </button>
+                </a>
+            </div>
+
+            <!-- Quiz Button with icon -->
+            <div class="row">
+                <a href="{{ url_for('quiz') }}">
+                    <button class="btn quiz">
+                        <img src="{{ url_for('static', filename='quiz-icon.png') }}" alt="Quiz Icon">
+                        Quiz
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

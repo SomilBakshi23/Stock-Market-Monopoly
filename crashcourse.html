@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Crash Course</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='crashcoursestyle.css') }}">
+</head>
+<body>
+    <video autoplay muted loop class="video-background">
+        <source src="{{ url_for('static', filename='bg video.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="container">
+        <h1>Stock Market Crash Course</h1>
+        
+        <h2>YouTube Playlists</h2>
+        <div class="playlists-container">
+            <div class="playlist">
+                <a href="https://youtu.be/RFP3ooXIiyI?si=LGOAnrecjTdv6QfJ" target="_blank">
+                    <img src="{{ url_for('static', filename='/Completestock.jpg') }}" alt="Stock Market Basics">
+                    <p>Complete Stock Market Basics for Beginners in Hindi.</p>
+                </a>
+            </div>
+            
+            <div class="playlist">
+                <a href="https://youtube.com/playlist?list=PL8uhW8cclMiNv8UT1NUawB-XpXVeJ8mN8&si=jgMkNmvhN5B0pW0Q" target="_blank">
+                    <img src="{{ url_for('static', filename='/stockinvest.jpg') }}" alt="Technical Analysis"> 
+                    <p>Basics Of Stock Market by CA Rachana Ranade</p>
+                </a>
+            </div>
+            
+            <div class="playlist">
+                <a href="https://youtu.be/XDtWSmnDLEs?si=PXxPFJ8EdqOG_Nun" target="_blank">
+                    <img src="{{ url_for('static', filename='/atoz.jpg') }}" alt="Advanced Trading">
+                    <p>Learn Stock Market A to Z For Free | marketfeed</p>
+                </a>
+            </div>
+        </div>
+
+        <h2>Recommended Books</h2>
+        <div class="books-container">
+            <div class="book">
+                <img src="https://m.media-amazon.com/images/I/91+t0Di07FL._AC_UY436_FMwebp_QL65_.jpg" alt="The Intelligent Investor">
+                <h3>The Intelligent Investor</h3>
+                <p>By Benjamin Graham</p>
+                <div class="buy-links">
+                    <a href="https://www.amazon.in/Intelligent-Investor-English-Paperback-2013/dp/0062312685/" target="_blank" class="buy-button">Buy on Amazon</a>
+                    <a href="https://www.flipkart.com/intelligent-investor/p/itmfc8nozzhy7zzh" target="_blank" class="buy-button">Buy on Flipkart</a>
+                </div>
+            </div>
+
+            <div class="book">
+                <img src="{{ url_for('static', filename='/ounws.png') }}" alt="One Up On Wall Street">
+                <h3>One Up On Wall Street</h3>
+                <p>By Peter Lynch</p>
+                <div class="buy-links">
+                    <a href="https://www.amazon.in/One-Up-Wall-Street-Already/dp/0743200403/" target="_blank" class="buy-button">Buy on Amazon</a>
+                    <a href="https://www.flipkart.com/one-up-wall-street/p/itmfbuz9vrph5m3q" target="_blank" class="buy-button">Buy on Flipkart</a>
+                </div>
+            </div>
+
+            <div class="book">
+                <img src="{{ url_for('static', filename='/tradingzone.jpg') }}" alt="Trading in the Zone">
+                <h3>Trading in the Zone</h3>
+                <p>By Mark Douglas</p>
+                <div class="buy-links">
+                    <a href="https://www.amazon.in/Trading-Zone-Confidence-Discipline-Attitude/dp/0735201447/" target="_blank" class="buy-button">Buy on Amazon</a>
+                    <a href="https://www.flipkart.com/trading-zone/p/itmfbt9pjzkhg9mg" target="_blank" class="buy-button">Buy on Flipkart</a>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="location.href='/index'" class="back-button">Back to Home</button>
+    </div>
+</body>
+</html>

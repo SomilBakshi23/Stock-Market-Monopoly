@@ -1,0 +1,70 @@
+{% extends "start.html" %}
+
+{% block title %}How to Play - Stock Monopoly{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='howtoplaystyle.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="howtoplay-container">
+    <div class="text-container">  <!-- Transparent black container -->
+        <div class="howtoplay-content">
+            <h1>How to Play Stock Monopoly</h1>
+            
+            <section class="game-section">
+                <h2>Getting Started</h2>
+                <p>Welcome to Stock Monopoly! This game simulates real-world stock trading in a fun and educational way. Each player starts with ₹10,000 in virtual money to invest.</p>
+            </section>
+
+            <section class="game-section">
+                <h2>Basic Rules</h2>
+                <ul>
+                    <li>Buy and sell stocks using real-time market data</li>
+                    <li>Track your portfolio performance</li>
+                    <li>Make strategic decisions based on market trends</li>
+                    <li>Compete with other players to build the most valuable portfolio</li>
+                </ul>
+            </section>
+
+            <section class="game-section">
+                <h2>How to Trade</h2>
+                <ol>
+                    <li><strong>Search Stocks:</strong> Use the search function to find stocks by their symbol or company name</li>
+                    <li><strong>Analyze:</strong> Study the stock charts and company information provided</li>
+                    <li><strong>Buy Stocks:</strong> Click the "Buy" button and enter the number of shares you want to purchase</li>
+                    <li><strong>Sell Stocks:</strong> View your portfolio and click "Sell" when you want to exit a position</li>
+                    <li><strong>Track Performance:</strong> Monitor your gains and losses in the Portfolio section</li>
+                </ol>
+            </section>
+
+            <section class="game-section">
+                <h2>Tips for Success</h2>
+                <ul>
+                    <li>Diversify your portfolio to minimize risk</li>
+                    <li>Keep track of market news and trends</li>
+                    <li>Don't invest all your money in a single stock</li>
+                    <li>Use the analysis tools provided to make informed decisions</li>
+                    <li>Practice with small investments before making larger trades</li>
+                </ul>
+            </section>
+
+            <section class="game-section">
+                <h2>Advanced Features</h2>
+                <ul>
+                    <li>Real-time stock price updates</li>
+                    <li>Historical price charts</li>
+                    <li>Portfolio analytics</li>
+                    <li>Performance tracking</li>
+                </ul>
+            </section>
+
+            <!-- Button Container -->
+            <div class="button-container">
+                <a href="{{ url_for('play') }}" class="play-button">Start Playing</a>
+                <a href="{{ url_for('start_page') }}" class="back-button">Back to Start</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

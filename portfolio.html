@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='portfoliostyle.css') }}">
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay muted loop id="bg-video">
+            <source src="{{ url_for('static', filename='bg video.mp4') }}" type="video/mp4">
+        </video>
+    </div>
+    <div class="portfolio-container">
+        <h1>Your Portfolio</h1>
+        <p>Current Balance: ₹{{ user.balance | number_format }}</p>
+        
+        <h2>Buy Trades</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Stock Symbol</th>
+                    <th>Quantity</th>
+                    <th>Price per Share</th>
+                    <th>Total Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for trade in buy_trades %}
+                <tr>
+                    <td>{{ trade.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    <td>{{ trade.stock_symbol }}</td>
+                    <td>{{ trade.quantity }}</td>
+                    <td>₹{{ trade.price | number_format }}</td>
+                    <td>₹{{ (trade.price * trade.quantity) | number_format }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <h2>Sell Trades</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Stock Symbol</th>
+                    <th>Quantity</th>
+                    <th>Price per Share</th>
+                    <th>Total Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for trade in sell_trades %}
+                <tr>
+                    <td>{{ trade.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    <td>{{ trade.stock_symbol }}</td>
+                    <td>{{ trade.quantity }}</td>
+                    <td>₹{{ trade.price | number_format }}</td>
+                    <td>₹{{ (trade.price * trade.quantity) | number_format }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="portfolio-summary">
+            <h2>Portfolio Summary</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Stock Symbol</th>
+                        <th>Total Shares</th>
+                        <th>Average Buy Price</th>
+                        <th>Current Price</th>
+                        <th>Total Value</th>
+                        <th>Profit/Loss</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for position in positions %}
+                    <tr>
+                        <td>{{ position.symbol }}</td>
+                        <td>{{ position.shares }}</td>
+                        <td>₹{{ position.avg_price | number_format }}</td>
+                        <td>₹{{ position.current_price | number_format }}</td>
+                        <td>₹{{ position.total_value | number_format }}</td>
+                        <td class="{{ 'profit' if position.profit_loss >= 0 else 'loss' }}">
+                            ₹{{ position.profit_loss | number_format }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="navigation-links">
+            <a href="/trade" class="button">Trade Stocks</a>
+            <a href="/index" class="button">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

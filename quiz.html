@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='quizstyle.css') }}">
+    <style>
+        .question {
+            display: none;
+        }
+        .question.active {
+            display: block;
+        }
+        .navigation-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        #submit-button {
+            display: none;
+        }
+        #submit-button.show {
+            display: block;
+        }
+        .results-container {
+            text-align: center;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .score {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .performance-message {
+            font-size: 24px;
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .excellent {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .good {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .needs-improvement {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .time-taken {
+            font-size: 18px;
+            color: #666;
+            margin: 10px 0;
+        }
+        .action-buttons {
+            margin-top: 20px;
+        }
+        .action-buttons button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop class="video-background">
+        <source src="{{ url_for('static', filename='bg video.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="container">
+        {% if error %}
+            <div class="error-message">
+                {{ error }}
+            </div>
+        {% elif quiz_completed %}
+            <div class="results-container">
+                <h1>Quiz Results</h1>
+                <div class="score">{{ score }}/{{ total_questions }}</div>
+                <div class="performance-message {{ performance_class }}">
+                    {{ performance_message }}
+                </div>
+                <div class="time-taken">
+                    Time taken: {{ time_taken }}
+                </div>
+                <div class="action-buttons">
+                    <button onclick="location.href='/quiz'">Try Again</button>
+                    <button onclick="location.href='/'">Back to Home</button>
+                </div>
+            </div>
+        {% else %}
+            <h1>Stock Market Quiz</h1>
+            <form id="quiz-form" action="/submit_quiz" method="POST">
+                <input type="hidden" name="start_time" value="{{ start_time }}">
+                {% for question in questions %}
+                <div class="question {% if loop.index == 1 %}active{% endif %}" data-question="{{ loop.index }}">
+                    <h3>{{ loop.index }}. {{ question.question }}</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q{{ question.id }}" value="a" required> {{ question.options.a }}</label>
+                        <label><input type="radio" name="q{{ question.id }}" value="b" required> {{ question.options.b }}</label>
+                        <label><input type="radio" name="q{{ question.id }}" value="c" required> {{ question.options.c }}</label>
+                        <label><input type="radio" name="q{{ question.id }}" value="d" required> {{ question.options.d }}</label>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="navigation-buttons">
+                    <button type="button" id="prev-button" style="display: none;">Previous</button>
+                    <button type="button" id="next-button">Next</button>
+                    <button type="submit" id="submit-button">Submit Quiz</button>
+                </div>
+            </form>
+            <button onclick="location.href='/'">Back to Home</button>
+        {% endif %}
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const questions = document.querySelectorAll('.question');
+            const nextButton = document.getElementById('next-button');
+            const prevButton = document.getElementById('prev-button');
+            const submitButton = document.getElementById('submit-button');
+            let currentQuestion = 0;
+
+            function showQuestion(index) {
+                questions.forEach(q => q.classList.remove('active'));
+                questions[index].classList.add('active');
+                
+                // Update button visibility
+                prevButton.style.display = index === 0 ? 'none' : 'block';
+                nextButton.style.display = index === questions.length - 1 ? 'none' : 'block';
+                submitButton.classList.toggle('show', index === questions.length - 1);
+            }
+
+            nextButton.addEventListener('click', function() {
+                const currentQuestionEl = questions[currentQuestion];
+                const radioButtons = currentQuestionEl.querySelectorAll('input[type="radio"]');
+                const isAnswered = Array.from(radioButtons).some(radio => radio.checked);
+                
+                if (!isAnswered) {
+                    alert('Please select an answer before proceeding.');
+                    return;
+                }
+
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    showQuestion(currentQuestion);
+                }
+            });
+
+            prevButton.addEventListener('click', function() {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    showQuestion(currentQuestion);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

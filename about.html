@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='aboutstyle.css') }}">
+</head>
+<body>
+
+<!-- Video Background -->
+<video autoplay muted loop id="bg-video">
+  <source src="{{ url_for('static', filename='bg video.mp4') }}" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<!-- Content Wrapper -->
+<div class="about-container">
+  <h1>Meet Our Team</h1>
+  <div class="team">
+    <!-- Team Member 1 -->
+    <div class="team-member">
+      <div class="member-info">
+        <div class="photo-circle">
+          <img src="{{ url_for('static', filename='Somil.jpg') }}" alt="Team Member 1">
+        </div>
+        <h3>Somil Bakshi</h3>
+        <p class="role">Lead Developer</p>
+        <p class="description">Somil led the backend development, integrating APIs and ensuring smooth functionality across the platform.</p>
+      </div>
+    </div>
+
+    <!-- Team Member 2 -->
+    <div class="team-member">
+      <div class="member-info">
+        <div class="photo-circle">
+          <img src="{{ url_for('static', filename='Manmeet.jpg') }}" alt="Team Member 2">
+        </div>
+        <h3>Manmeet Kaur Dhanjal</h3>
+        <p class="role">UI/UX Designer</p>
+        <p class="description">Manmeet designed the user interface and focused on making the platform user-friendly and visually appealing.</p>
+      </div>
+    </div>
+
+    <!-- Team Member 3 -->
+    <div class="team-member">
+      <div class="member-info">
+        <div class="photo-circle">
+          <img src="{{ url_for('static', filename='Aditya.jpg') }}" alt="Team Member 3">
+        </div>
+        <h3>Aditya Dupate</h3>
+        <p class="role">Stock Market Analyst</p>
+        <p class="description">Aditya provided real-time stock data integration and analysis features for the platform.</p>
+      </div>
+    </div>
+
+    <!-- Team Member 4 -->
+    <div class="team-member">
+      <div class="member-info">
+        <div class="photo-circle">
+          <img src="{{ url_for('static', filename='mithlesh.jpg') }}" alt="Team Member 4">
+        </div>
+        <h3>Mithilesh Dicholkar</h3>
+        <p class="role">Project Manager</p>
+        <p class="description">Mithilesh managed the project workflow and ensured that all milestones were met on time.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why We Created This Project -->
+  <div class="project-info">
+    <h2>Why We Created This Project</h2>
+    <p>StockMonopoly: Your Risk-Free Gateway to Financial Literacy</p>
+
+    <p>As aspiring college students passionate about financial education, we recognized a critical gap in practical investment learning. Traditional methods often left newcomers intimidated by the complex world of stock trading, with the fear of potential financial losses blocking their path to understanding.</p>
+    
+    <p>Our solution? StockMonopoly - an interactive, simulation-based platform designed to demystify stock trading for beginners. We've created a dynamic learning environment where users can:</p>
+    
+    <ul>
+        <li>Explore real-time stock market mechanics</li>
+        <li>Practice trading strategies without risking actual money</li>
+        <li>Gain confidence through hands-on experience</li>
+        <li>Understand market dynamics in a safe, controlled setting</li>
+    </ul>
+    
+    <p>Born from our academic project, StockMonopoly transforms the intimidating landscape of financial trading into an accessible, engaging learning journey. We believe that financial knowledge should be within everyone's reach, and our platform serves as a bridge between theoretical understanding and practical application.</p>
+    
+    <p>Whether you're a student, a professional looking to expand your investment knowledge, or simply curious about how the stock market works, StockMonopoly provides a risk-free playground to develop your financial intuition.</p>
+    
+    <p class="tagline">Learn. Experiment. Grow. Without the Fear of Financial Loss.</p>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="button-container">
+    <a href="/index" class="btn">Go to Home Page</a>
+    <a href="/profile" class="btn">Go to Profile Page</a>
+    <a href="/start" class="btn">Go Back</a> <!-- New Go Back Button -->
+  </div>
+
+</div>
+
+</body>
+</html>
