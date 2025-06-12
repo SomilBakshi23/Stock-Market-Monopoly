@@ -1,0 +1,99 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body, html {
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+}
+/* Video Background */
+.video-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Push video to the background */
+    overflow: hidden;
+}
+#background-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video covers the whole background */
+    filter: blur(5px); /* Apply a slight blur effect */
+}
+/* Centering the Form Container */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+/* Login Form Box */
+.form-box {
+    background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent background */
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    
+    text-align: center;
+}
+.form-box h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+/* Input Fields */
+input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    font-size: 16px;
+}
+/* Buttons */
+button, .btn-register {
+    width: 100%;
+    padding: 12px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Submit Button */
+button {
+    background-color: #0d0d0d;
+    color: white; /* Text color for submit button */
+    transition: background-color 0.3s ease;
+}
+button:hover {
+    background-color: #262728;
+}
+/* Register Button */
+.btn-register {
+    background-color: #0b7af1; /* Blue color */
+    color: white; /* Ensure text color is white */
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+.btn-register:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    text-decoration: none;
+}
+/* Register Link */
+.form-box a {
+    color: #fcfcfc;
+    text-decoration: none;
+}
+.form-box a:hover {
+    text-decoration: none;
+}

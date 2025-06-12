@@ -1,0 +1,92 @@
+/* Video Background */
+#bg-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Main Container */
+.howtoplay-container {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+/* Transparent Black Background */
+.text-container {
+    background-color: rgba(0, 0, 0, 0.6); /* Black with transparency */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Content Styling */
+.howtoplay-content {
+    color: white; /* White text for visibility */
+}
+
+.howtoplay-content h1 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.game-section {
+    margin-bottom: 30px;
+}
+
+.game-section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #FEDD5A; /* Yellow title for better visibility */
+}
+
+.game-section p, .game-section ul, .game-section ol {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.game-section ul, .game-section ol {
+    padding-left: 20px;
+}
+
+.game-section li {
+    margin-bottom: 10px;
+}
+
+/* Button Styling */
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.play-button, .back-button {
+    display: inline-block;
+    width: 200px;
+    margin: 10px;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #FEDD5A; /* Bright Yellow */
+    color: black;
+    border: 2px solid #E6C140; /* Subtle border to keep shape */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    text-decoration: none; /* Remove underline */
+}
+
+/* Hover Effect */
+.play-button:hover, .back-button:hover {
+    background-color: #E6C140; /* Slightly darker yellow */
+    transform: scale(1.05);
+    color: black; /* Keep text black */
+    text-decoration: none; /* Ensure no underline */
+}

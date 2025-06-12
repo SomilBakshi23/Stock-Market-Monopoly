@@ -1,0 +1,78 @@
+/* Styles for portfolio page */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Ensure the video stays fixed and covers the full screen */
+.video-container {
+    position: fixed; /* Fix it so it stays in place */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+#bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(8px);
+}
+
+/* Portfolio container should be properly positioned */
+.portfolio-container {
+    position: relative;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7); /* Change white to dark semi-transparent */
+    max-width: 900px;
+    margin: 50px auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    color: white; /* Ensure text remains visible */
+}
+
+h1, h2 {
+    color: #fff; /* Change to white for better contrast */
+}
+
+/* Ensure table visibility */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.1); /* Light transparency */
+}
+
+table, th, td {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+}
+
+th {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+a:hover {
+    background-color: #2980b9;
+}

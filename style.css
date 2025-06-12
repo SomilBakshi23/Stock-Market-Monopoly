@@ -1,0 +1,161 @@
+/* Style for the video background */
+#bg-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 100vw;   /* Set width to 100% of viewport */
+    height: 100vh;  /* Set height to 100% of viewport */
+    object-fit: cover;  /* Ensure the video covers the screen without stretching */
+    z-index: -1;      /* Set the video behind all other content */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: rgb(12, 11, 11);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden; /* Prevent scrolling */
+}
+
+.container {
+    text-align: center;
+    position: relative;
+    height: 100%;
+}
+
+.login-signup {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+/* Style for buttons */
+.btn {
+    background-color: #FEDD5A;
+    border: none;
+    margin: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 25px 75px;
+    color: black; /* Ensure button text is readable */
+    text-decoration: none; /* No underline */
+    vertical-align: middle; /* Align text properly */
+}
+
+/* Remove default link colors */
+a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit color to avoid purple links */
+}
+
+/* Ensure buttons wrapped in a tags also remove underline */
+a .btn {
+    display: inline-block;
+    text-decoration: none;
+    color: black; /* Ensure button text color is black */
+}
+
+/* Fix image alignment inside buttons */
+.btn img {
+    width: 34px;
+    height: 34px;
+    margin-right: 10px;
+    vertical-align: middle; /* Aligns image with text */
+}
+
+/* Hover effect for buttons */
+.btn:hover {
+    background-color: #FEC847;
+}
+
+/* Login and signup buttons remain unchanged */
+.login-signup .btn {
+    font-size: 18px;
+    padding: 10px 30px;
+}
+
+/* Button-specific sizing - Modify these to individually resize */
+.profile-btn {
+    font-size: 24px;
+    padding: 15px 80px;
+}
+
+.portfolio-btn, .trade-btn {
+    font-size: 20px;
+    padding: 15px 70px;
+}
+
+.crash-course-btn {
+    font-size: 22px;
+    padding: 15px 85px;
+}
+
+.quiz-btn {
+    font-size: 18px;
+    padding: 15px 50px;
+}
+
+/* Center buttons on the page */
+.buttons-section {
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Flex rows for buttons */
+.row {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+/* Specific row for Portfolio and Trade buttons */
+.row-portfolio-trade {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Specific row for Trading Crash Course and Quiz */
+.row-crash-quiz {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Remove underline from the a tags inside .login-signup */
+.login-signup a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.login-signup a .btn {
+    display: inline-block;
+    color: inherit; /* Inherit color from button */
+}
+/* Style for welcome text */
+.welcome-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    margin-right: 15px;
+}
+
+/* Style for Sign Out button */
+.logout {
+    background-color: #FF4C4C;
+}
+
+.logout:hover {
+    background-color: #E04040;
+}

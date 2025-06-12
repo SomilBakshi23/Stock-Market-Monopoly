@@ -1,0 +1,153 @@
+/* quizstyle.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    background-color: #000;
+    position: relative;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    filter: blur(8px);
+}
+
+.question {
+    display: none;
+    font-size: 22px; /* Medium font size for questions */
+    background-color: rgba(0, 0, 0, 0.85); /* Black container for questions */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow for clean look */
+}
+
+.question.active {
+    display: block;
+}
+
+.options {
+    margin-top: 10px;
+}
+
+.options label {
+    font-size: 20px;
+    display: block;
+    background-color: rgba(255, 255, 255, 0.1); /* Light container for options */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.options label:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Hover effect for options */
+}
+
+.navigation-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* Add this to create space between the buttons */
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+#prev-button {
+    margin-bottom: 15px; /* Adds a vertical space below Previous button */
+}
+
+#submit-button {
+    display: none;
+}
+
+#submit-button.show {
+    display: block;
+}
+
+.results-container {
+    text-align: center;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.score {
+    font-size: 36px; /* Reduced font size for the score */
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.performance-message {
+    font-size: 22px;
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.excellent, .good, .needs-improvement {
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.excellent {
+    background-color: #28a745; /* Green for excellent */
+}
+
+.good {
+    background-color: #ffc107; /* Yellow for good */
+}
+
+.needs-improvement {
+    background-color: #dc3545; /* Red for needs improvement */
+}
+
+.time-taken {
+    font-size: 18px;
+    color: #666;
+    margin: 10px 0;
+}
+
+.action-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.action-buttons button {
+    margin: 0 10px;
+}

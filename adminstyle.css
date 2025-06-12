@@ -1,0 +1,110 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body, html {
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    overflow: auto;  /* Enable scrolling */
+}
+
+/* Video Background */
+#bg-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    padding: 15px;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FEDD5A !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: white !important;
+    font-weight: bold;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #FEDD5A !important;
+}
+
+/* Container Styling */
+.container {
+    margin-top: 30px;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 100vh;  /* Ensure the container covers full height */
+}
+
+/* Table Styling */
+.table {
+    background: transparent !important;
+}
+
+.table thead {
+    background-color: #FEDD5A;
+    color: black;
+    font-weight: bold;
+}
+
+.table tbody {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Buttons */
+.btn {
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+/* Reset Balance Button */
+.btn-warning {
+    background-color: #FEDD5A;
+    color: black;
+}
+
+.btn-warning:hover {
+    background-color: #FEC847;
+}
+
+/* Delete Button */
+.btn-danger {
+    background-color: #FF4C4C;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #E04040;
+}
+
+/* Logout Button */
+.logout-btn {
+    background-color: #FF4C4C;
+    color: white;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.logout-btn:hover {
+    background-color: #E04040;
+}

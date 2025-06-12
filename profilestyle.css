@@ -1,0 +1,45 @@
+/* Video background styling */
+#bg-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    filter: blur(5px); /* Slight blur effect */
+  }
+  
+  /* Content styling */
+  .content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-top: 100px;
+  }
+  
+  /* Profile box styling */
+  .profile-box {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    color: black; /* Text inside the box is black */
+    padding: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: black; /* Set "User Dashboard" heading color to black */
+  }
+  
+  p {
+    font-size: 1.2em;
+    color: black; /* Set "Name" and "Email" text color to black */
+  }
+  
+  .btn {
+    margin-top: 10px;
+  }
+  
+  

@@ -1,0 +1,118 @@
+/* crashcoursestyle.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    position: relative;
+    background-color: #000; /* Fallback color */
+}
+
+.container {
+    position: relative;
+    z-index: 1; /* Ensures content is above the video */
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1, h2 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 48px;
+    margin-top: 20px;
+}
+
+.playlists-container,
+.books-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.playlist, .book {
+    width: 30%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for the containers */
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.playlist img, .book img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.playlist p, .book h3, .book p {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.buy-links {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.buy-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.buy-button:hover {
+    background-color: #0056b3;
+}
+
+.back-button {
+    display: block;
+    margin: 30px auto;
+    padding: 15px 30px;
+    font-size: 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    width: 200px;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #218838;
+}
+
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    filter: blur(10px); /* Slightly blurred background */
+    opacity: 0.5; /* Light opacity for better readability */
+}
+
+.book img {
+    width: 200px;  /* Set desired width */
+    height: 300px; /* Set desired height */
+    object-fit: cover; /* Ensure the image covers the area while maintaining aspect ratio */
+    border-radius: 10px; /* Keep the existing border radius */
+    margin-bottom: 10px; /* Existing margin for spacing */
+}
